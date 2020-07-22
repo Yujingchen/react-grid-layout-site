@@ -6,7 +6,7 @@ font-family: Helvetica,Tahoma,Arial,Hiragino Sans GB,Hiragino Sans GB W3,Microso
 height: 150px;
 width: 100%;
 background: hsla(0,0%,100%,.7);
-z-index: 1;
+z-index: 2;
 box-sizing: border-box;
 border-bottom: solid 3px #ffb200;
 box-shadow: 0-2px 10px rgba(0, 0, 0, .3);
@@ -29,7 +29,8 @@ function Footer() {
         <StyledFooter>
             <CopyRight>
                 react-grid-layout is released under <strong>MIT License</strong><br />
-                Copyright © 2020
+                by react-grid-layout and design idea comes from Ef.js<br />
+                The site is only for learning purpose. Copyright © 2020
             </CopyRight>
         </StyledFooter>
     );

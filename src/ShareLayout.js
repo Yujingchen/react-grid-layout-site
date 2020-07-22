@@ -1,5 +1,7 @@
 import React from 'react';
+import Header from './Header'
 import styled from 'styled-components'
+
 import './App.css';
 
 const Body = styled.div`
@@ -25,7 +27,7 @@ height:80px;
 max-width: 1100px;
 line-height: 2;
 padding-left:100px;
-font-weight: 600;
+font-weight: 500;
 font-size: 30px;
 pointer-events: none;
 text-shadow: 2px 2px 10px rgba(0,0,0,.5);
@@ -39,18 +41,21 @@ text-shadow: 2px 2px 10px rgba(0,0,0,.5);
 
 function ShareLayout({ children }) {
     return (
-        <Body>
-            <BodyTop>
-                <HeaderLogoName>
-                    <div>
-                        react-grid-layout
-                    </div>
-                </HeaderLogoName>
-                <BodyBottom>
-                    {children}
-                </BodyBottom >
-            </BodyTop >
-        </Body >
+        <div>
+            <Header />
+            <Body>
+                <BodyTop>
+                    <HeaderLogoName>
+                        <div>
+                            react-grid-layout
+                            </div>
+                    </HeaderLogoName>
+                    <BodyBottom>
+                        {children}
+                    </BodyBottom >
+                </BodyTop >
+            </Body >
+        </div>
     );
 }
 

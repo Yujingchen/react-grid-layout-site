@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components'
-import { useHistory } from "react-router-dom";
 import GuideLayout from './GuideLayout'
 
 const Content = styled.div`
@@ -42,7 +41,7 @@ overflow: auto;
 font-family: monospace;
 font-weight:500;
 `
-const PainText = styled.p`
+const PlainText = styled.p`
 margin-block-start: 0.5em;
 margin-block-end: 0.5em;
 font-size: 15px;
@@ -52,15 +51,14 @@ font-weight:500;
 
 const Marked = styled.span`
 ${props => props.keyword ? "color: #07a;" : ""}
-${props => props.comment ? "c>lor: #690;" : ""}
+${props => props.comment ? "color: #690;" : ""}
 ${props => props.function ? "color: #DD4A68;" : ""}
 ${props => props.punctuation ? "color: #999;" : ""}
 ${props => props.warning ? "color: #ffb200;" : ""}
+${props => props.danger ? "color:#d73a49" : ""}
 `
 
 function QuickStart() {
-    let history = useHistory();
-    let path = history.location.pathname
     return (
         <GuideLayout>
             <Content>
@@ -68,34 +66,49 @@ function QuickStart() {
                 <Section>
                     <SectionList>
                         <SectionListItem>
-                            <Title2>Hello World</Title2>
-                            <iframe width="100%" height="200" title="jsfiddle" src="//jsfiddle.net/yujingdni/60cn29os/2/embedded/result,js/" allowFullScreen="allowfullscreen" frameBorder="0"></iframe>
+                            <Title2>Demo</Title2>
+                            <iframe width="100%" height="200" src="//jsfiddle.net/yujingdni/3ek9mxp5/33/embedded/result,js/"></iframe>
                         </SectionListItem>
                         <SectionListItem>
                             <Title2>Installation</Title2>
-                            <CodeText> &lt;script src="https://unpkg.com/ef.js@latest"&gt; &lt;/script&gt; </CodeText>
-                            <PainText>or with package manager</PainText>
-                            <CodeText> &lt;script src="https://unpkg.com/ef.js@latest"&gt; &lt;/script&gt; </CodeText>
+                            <PlainText>Install the React-Grid-Layout package package using npm:</PlainText>
+                            <CodeText>npm install react-grid-layout</CodeText>
+                            <PlainText>Include the following stylesheets in your application:</PlainText>
+                            <CodeText>/node_modules/react-grid-layout/css/styles.css</CodeText>
+                            <CodeText>/node_modules/react-resizable/css/styles.css</CodeText>
                         </SectionListItem>
                         <SectionListItem>
-                            <Title2>Creating a template</Title2>
-                            <PainText>There are two ways of creating a template. One is from template string, another is from the AST. In most situation you do not need to write an AST by hand, so we are only talking about the template string by the time.</PainText>
-                            <PainText>First of all, you should get the creation function from ef. In browser, it should be <InlineCodeText>const = ef  &#123; create, t &#125;</InlineCodeText>, with CommonJS loader, it should be  <InlineCodeText>const &#123; create, t &#125; = require('ef.js')</InlineCodeText>, or with ES6 module, it should be <InlineCodeText>import &#123; create, t &#125; from 'ef.js'</InlineCodeText>. create is for both template strings and ASTs, while t only accepts JavaScript template string. Here is the Hello World code:</PainText>
+                            <Title2>Usage</Title2>
+                            <PlainText>Use ReactGridLayout like any other component. The following example below will produce a grid with three items where:</PlainText>
+                            <PlainText>
+                                <ul>
+                                    <li>users will not be able to drag or resize item a</li>
+                                    <li>item b will be restricted to a minimum width of 2 grid blocks and a maximum width of 4 grid blocks</li>
+                                    <li>users will be able to freely drag and resize item c</li>
+                                </ul>
+                            </PlainText>
+
                             <CodeText>
-                                <Marked keyword>const</Marked> <Marked punctuation>&#123;</Marked>create, t<Marked punctuation>&#125;</Marked> = ef;<br /><br />
-                                <Marked keyword>const </Marked>tpl = <Marked commend>`</Marked> <br />
-                                <Marked commend>>h1</Marked> <br />
-                                <Marked commend>   .Hello World!</Marked> <br /> <br />
-                                <Marked commend>`</Marked> <Marked punctuation>;</Marked> <br /> <br />
-                                <Marked keyword>const </Marked> HelloWorld = <Marked function>create</Marked> <Marked punctuation>(</Marked>tpl<Marked punctuation>)</Marked > <Marked punctuation>;</Marked> <br /> <br />
+                                <Marked keyword>import</Marked> <Marked warning>GridLayout</Marked> <Marked keyword>from</Marked> <Marked>'react-grid-layout';</Marked><br /><br />
+                                <Marked keyword>class</Marked> MyFirstGrid <Marked keyword>extends </Marked>React.Component &#123;<br />
+                                <Marked keyword>  render() &#123;</Marked> <br />
+                                <Marked comment>    // layout is an array of objects, see the demo for more complete usage </Marked><br />                             
+                                <Marked >    <Marked keyword>const</Marked> layout = [</Marked> <br />
+                                <Marked >      &#123; i: 'a', x: 0, y: 0, w: 1, h: 2, static: true&#125;,</Marked> <br /> 
+                                <Marked >      &#123; i: 'b', x: 1, y: 0, w: 3, h: 2, minW: 2, maxW: 4 &#125;,</Marked> <br /> 
+                                <Marked >      &#123; i: 'c', x: 4, y: 0, w: 1, h: 2 &#125;,</Marked> <br /> 
+                                <Marked >    ];</Marked> <br /> 
+                                <Marked > <Marked keyword>return</Marked> (</Marked> <br /> 
+                                <Marked >      <Marked warning>&lt;GridLayout</Marked> <Marked danger>className</Marked>="layout" <Marked danger>layout</Marked>=&#123;layout&#125; <Marked danger>cols</Marked>=&#123;12&#125; <Marked danger>rowHeight</Marked>=&#123;30&#125; <Marked danger>width</Marked>=&#123;1200&#125; &gt;</Marked> <br /> 
+                                <Marked >         &lt;div <Marked danger>key</Marked>="a"&gt;a &lt;/div&gt;</Marked> <br /> 
+                                <Marked >         &lt;div <Marked danger>key</Marked>="b"&gt;b &lt;/div&gt;</Marked> <br /> 
+                                <Marked >         &lt;div <Marked danger>key</Marked>="c"&gt;c &lt;/div&gt;</Marked> <br /> 
+                                <Marked >       <Marked warning>&lt;/GridLayout&gt;</Marked></Marked> <br /> 
+                                <Marked >    )</Marked> <br /> 
+                                <Marked >  }</Marked> <br /> 
+                                <Marked > }</Marked> <br /> 
                             </CodeText >
                         </SectionListItem >
-                        <SectionListItem>
-                            <Title2>Destorying</Title2>
-                        </SectionListItem>
-                        <SectionListItem>
-                            <Title2>What is EFML</Title2>
-                        </SectionListItem>
                     </SectionList >
                 </Section >
             </Content >

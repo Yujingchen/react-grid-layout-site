@@ -1,11 +1,10 @@
-import React from 'react';
-import styled, { keyframes } from 'styled-components'
+import React, { useEffect, useState, useRef } from 'react';
+import styled, { css, keyframes } from 'styled-components'
 import logo from "./image/react2-3.png"
 import { Link } from 'react-router-dom';
 import { useHistory } from "react-router-dom";
 
 const Nav = styled.div`
-font-family: Helvetica,Tahoma,Arial,Hiragino Sans GB,Hiragino Sans GB W3,Microsoft YaHei,STXihei,STHeiti,Heiti,SimSun,sans-serif;
 height: 60px;
 border-bottom: solid 4px #ffb200;
 position: fixed;
@@ -68,41 +67,48 @@ from {
   to {
     transform: rotate(360deg);
   }
-`
+`;
+const animation = (props) => css`
+    ${AppLogoSpin} infinite 20s linear
+`;
 const LogoImage = styled.img`
 width: 100px;
 height: 91px;
-// animation: ${AppLogoSpin} infinite 20s linear;
 border-radus:5px;
 cursor: pointer;
--webkit-transform: scale(1);
 opacity: 1;
-&:focus{
-    transform: scale(2,2);
-}
 `;
 
 function Header() {
+    console.log(animation)
     const menuItems = [
         'home',
         'guide',
         'example'
     ];
+
     let history = useHistory();
-    let pathname = history.location.pathname.substring(1)
+    let pathname = history.location.pathname
+    const isMountedRef = useRef(null);
+    const [spinning, setSpinning] = useState(false)
+    useEffect(() => {
+        if (isMountedRef) {
+            setSpinning(true)
+        }
+        return () => isMountedRef.current = false;
+    }, [])
     return (
         <Nav>
             <NavBar>
                 <HeaderLogo >
-                    <LogoImage src={logo} alt='logo'></LogoImage>
+                    <LogoImage spinning={spinning} src={logo} alt='logo'></LogoImage>
                 </HeaderLogo>
                 <HeaderLinks>
                     {menuItems.map(menuItem => {
-                        console.log(pathname)
-                        const isActive = menuItem === pathname ? "true" : "false"
+                        const isActive = pathname.includes(menuItem) ? "true" : "false"
                         return (
                             <Wrapper key={menuItem}>
-                                <HeaderLink active={isActive} to={`/${menuItem}`} >
+                                <HeaderLink active={isActive} to={`/${menuItem}`}>
                                     {menuItem.toUpperCase()}
                                 </HeaderLink>
                             </Wrapper>

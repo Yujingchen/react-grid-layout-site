@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
-import { useHistory } from "react-router-dom";
 import ShareLayout from "./ShareLayout"
-
 const SideList = styled.div`
-${props => props.visible ? `position: absolute;top: ${props.offset + 140}px;` : "position:fixed;"}
+${props => props.visible ? `position: absolute;top: ${props.offset + 140}px; ` : "position:fixed;"}
+${props => props.innerHeight <= 500 & props.innerHeight >= 300 ? "height: 200px; overflow-y:scroll;" : props.innerHeight < 300 ? "height: 100px; overflow-y:scroll;" : ""}
 display:inline-block;
 max-width: calc(100vw - 36px);
 min-height: calc(50vh - 140px);
@@ -37,12 +36,12 @@ const SideLink = styled(Link)`
 function GuideLayout({ children }) {
     const [visible, setVisible] = useState(false)
     const [offset, setOffset] = useState("0")
+    const innerHeight = window.innerHeight
     const onScroll = () => {
-        const d = document.querySelector('.hxOqgg');
+        const d = document.querySelector('.sc-fznMnq.etDpzJ');
         if (d) {
             const offsetTop = d.offsetTop
             const scrollY = window.scrollY
-            const innerHeight = window.innerHeight
             const offset = scrollY + innerHeight
             if (offset >= offsetTop && !visible) {
                 setVisible(true)
@@ -56,55 +55,37 @@ function GuideLayout({ children }) {
     useEffect(() => {
         window.addEventListener('scroll', onScroll)
     })
-    let history = useHistory();
-    let path = history.location.pathname
-    console.log(path)
     return (
         <ShareLayout>
-            <SideList visible={visible} offset={offset}>
+            <SideList visible={visible} offset={offset} innerHeight={innerHeight}>
                 <SideListItem>
                     <SideLink to='/guide/quick-start'>Quick Start
                             </SideLink>
                 </SideListItem>
                 <SideListItem>
-                    <SideLink to='/guide/efml'>
-                        EFML
+                    <SideLink to='/guide/responsive-usage'>
+                        Responsive Usage
                             </SideLink>
                 </SideListItem>
                 <SideListItem>
-                    <SideLink to='/guide/efml'>
-                        Basic Binding
-                            </SideLink>
+                    <SideLink to='/guide/grid-layout-props'>
+                        Grid Layout Props
+                    </SideLink>
                 </SideListItem>
                 <SideListItem>
-                    <SideLink to='/guide/efml'>
-                        Two-way Binding
-                            </SideLink>
+                    <SideLink to='/guide/grid-item-props'>
+                        Grid Item Props
+                    </SideLink>
                 </SideListItem>
                 <SideListItem>
-                    <SideLink to='/guide/efml'>
-                        Value Subscribing
-                            </SideLink>
-                </SideListItem>
-                <SideListItem>
-                    <SideLink to='/guide/efml'>
+                    <SideLink to='/guide/event-handling'>
                         Events Handling
-                            </SideLink>
+                    </SideLink>
                 </SideListItem>
                 <SideListItem>
-                    <SideLink to='/guide/efml'>
-                        Mounting
-                            </SideLink>
-                </SideListItem>
-                <SideListItem>
-                    <SideLink to='/guide/efml'>
-                        Bundled Rendering
-                            </SideLink>
-                </SideListItem>
-                <SideListItem>
-                    <SideLink to='/guide/efml'>
-                        AST Structure
-                            </SideLink>
+                    <SideLink to='/guide/performance'>
+                        Performance
+                    </SideLink>
                 </SideListItem>
             </SideList>
             {children}

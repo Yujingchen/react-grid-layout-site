@@ -1,6 +1,7 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components'
 import logo from "./image/react2.4.png"
+import ShareLayout from "./ShareLayout"
 import './App.css';
 
 const HeaderLogoName = styled.div`
@@ -58,19 +59,21 @@ animation: ${LogoSpin} infinite 20s linear;
 
 function Home() {
     return (
-        <Body>
-            <BodyTop>
-                <HeaderLogoName>
-                    <div>
-                        react-grid-layout
+        <ShareLayout>
+            <Body>
+                <BodyTop>
+                    <HeaderLogoName>
+                        <div>
+                            react-grid-layout
                     </div>
-                </HeaderLogoName>
-                <BodyBottom>
-                    <LogoImage src={logo} alt='logo'></LogoImage>
-                    <h2>Opps! <br />Nothing seems to be here...</h2>
-                </BodyBottom>
-            </BodyTop>
-        </Body >
+                    </HeaderLogoName>
+                    <BodyBottom>
+                        <LogoImage src={logo} alt='logo'></LogoImage>
+                        <h2>Opps! <br />Nothing seems to be here...</h2>
+                    </BodyBottom>
+                </BodyTop>
+            </Body >
+        </ShareLayout>
     );
 }
 
